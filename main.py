@@ -7,7 +7,7 @@ import sys
 import random
 import pyautogui
 from tkinter import *
-
+import time
 
 
 root = Tk()
@@ -99,6 +99,7 @@ website opening
 password taking
 password changing
 exitting
+timer/stopwatch
 
 '''
 
@@ -278,7 +279,22 @@ if __name__ == "__main__":
                 speak('aadios amigo')
                 speak('quitting this session')
                 quit()
+                
+            elif 'timer' in query or 'stopwatch' in query:
+                    speak("For how many minutes?")
+                    local_time = takeCommand().lower()
+                    local_time = local_time.replace('for', '')
+                    local_time = local_time.replace('minutes', '')
+                    local_time = local_time.replace('minute', '')
+                    local_time = local_time.replace('in', '')
 
+                    local_time = float(local_time)
+                    local_time = local_time * 60
+                    speak(f'I will remind you in {local_time} seconds')
+
+                    time.sleep(local_time)
+                    speak('Your time has been finished sir')
+                    
             else:
                 if query != 'none':
                     search = query
