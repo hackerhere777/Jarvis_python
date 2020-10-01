@@ -7,6 +7,7 @@ import sys
 import random
 import pyautogui
 from tkinter import *
+from pyowm import *
 
 
 
@@ -64,11 +65,17 @@ def get_val():
     CONF_PSWD = conf_passwordvalue.get()
     return PSWD, CONF_PSWD
 
+def weather():
+        owm = OWM('your-API-key')  # You MUST provide a valid API key (which is free, btw)
+        mgr = owm.weather_manager()
+        observation = mgr.weather_at_place('London,GB')#replace with appropiate city
+        w = observation.weather
+        print(w.wind(), w.humidity, w.temperature('celsius'))
+	    speak(w.wind(), w.humidity, w.temperature('celsius'))
 
 def takePassword():
     with open ("jarvis_pass.txt", 'r') as f:
         JARVIS_password = f.read()
-
     root.mainloop()
     return_val = False
     value = get_val()
@@ -235,6 +242,9 @@ if __name__ == "__main__":
             elif 'what' and 'time' in query:
                 print(datetime.datetime.now().strftime('%H hours %M minutes and %S seconds'))
                 speak(datetime.datetime.now().strftime('%H hours %M minutes and %S seconds'))
+                
+            elif 'weather' in query:
+                weather()
 
             elif 'open youtube' in query:
                 speak('opening Youtube')
