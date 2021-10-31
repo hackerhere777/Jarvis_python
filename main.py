@@ -278,6 +278,11 @@ if __name__ == "__main__":
                 speak('aadios amigo')
                 speak('quitting this session')
                 quit()
+                
+            elif 'open spotify' in query:
+                speak("opening spotify")
+                codepath = "C:\\Users\\username\\AppData\\Roaming\\Spotify\\Spotify.exe"
+                os.startfile(codepath)
 
             else:
                 if query != 'none':
